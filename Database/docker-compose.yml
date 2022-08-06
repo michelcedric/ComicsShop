@@ -20,3 +20,4 @@ services:
       - '8091:3306'
     volumes:
       - comics_shop:/var/lib/mysql
+      - ./scripts:/docker-entrypoint-initdb.d

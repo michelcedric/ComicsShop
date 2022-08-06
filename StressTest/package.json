@@ -6,7 +6,7 @@
   "scripts": {
     "rest-smoke": "SERVER=rest ROUTE=smoke node test.js",
     "node-smoke": "SERVER=node ROUTE=smoke node test.js",
-    "rest-test": "SERVER=rest ROUTE=comics node test.js",
+    "rest-test": "node test.js",
     "node-test": "SERVER=node ROUTE=comics node test.js"
   },
   "dependencies": {

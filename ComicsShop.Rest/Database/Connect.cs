@@ -11,7 +11,8 @@ public static class Connect
     {
         service.AddScoped(_ =>
         {
-            var connection = new MySqlConnection(Environment.GetEnvironmentVariable("DB_CONNECTION_STRING"));
+            var connection = new MySqlConnection("server=localhost;port=8091;database=comics_shop;uid=comics_shop;pwd=password");
+            //var connection = new MySqlConnection(Environment.GetEnvironmentVariable("DB_CONNECTION_STRING"));
             var compiler = new MySqlCompiler();
             var db = new QueryFactory(connection, compiler);
 

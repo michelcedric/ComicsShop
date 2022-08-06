@@ -4,25 +4,26 @@ using MinimalApi.Endpoint;
 
 namespace ComicsShop.Rest.Endpoints;
 
-public class GetAllComics : IEndpoint<IEnumerable<ComicsResponse>>
+public class GetAllComics : IEndpoint<IEnumerable<ComicsResponse>, IComicsService>
 {
-    private readonly IComicsService _service;
     private readonly IComicsMapper _mapper;
 
-    public GetAllComics(IComicsService service, IComicsMapper mapper)
+    public GetAllComics(IComicsMapper mapper)
     {
-        _service = service;
         _mapper = mapper;
     }
 
     public void AddRoute(IEndpointRouteBuilder app)
     {
-        app.MapGet("/comics", HandleAsync);
+        app.MapGet("/comics", (IComicsService service) =>
+        {
+            return HandleAsync(service);
+        });
     }
 
-    public async Task<IEnumerable<ComicsResponse>> HandleAsync()
+    public async Task<IEnumerable<ComicsResponse>> HandleAsync(IComicsService service)
     {
-        var data = await _service.GetAll();
+        var data = await service.GetAll();
 
         return _mapper.MapToComicsListResponse(data);
     }

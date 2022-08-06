@@ -6,7 +6,7 @@ let servers = {
 };
 
 const instance = autocannon({
-    url: `${servers[process.env.SERVER]}/${process.env.ROUTE}`,
+    url: 'http://localhost:8093/comics',
     method: 'GET',
     connections: 10,
     pipelining: 1,
@@ -16,6 +16,10 @@ const instance = autocannon({
         connections: 1,
         duration: 3
     }
-}, autocannon.printResult)
+}, finishedBench)
 
 autocannon.track(instance, { renderProgressBar: true });
+
+function finishedBench(err, res) {
+    console.log('finished bench', err, res)
+}

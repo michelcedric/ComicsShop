@@ -14,3 +14,5 @@ obj/
 **/dist
 
 **/node_modules
+
+.vs
